@@ -2,13 +2,7 @@
 //Calcola la somma delle età (agesSum) usando reduce.
 //Stampa in console l’età media degli autori dei libri.
 
-const ages = books
-  .sort((a, b) => a.author.age - b.author.age)
-  .map((book) => book.author.age);
-console.log(ages);
+const ages = books.map((b) => b.author.age);
 
-const agesSum = ages.reduce((total, age) => total + age, 0);
-console.log(agesSum);
-
-const averageAge = agesSum / ages.length;
-console.log(averageAge.toFixed(2));
+const agesTotal = ages.reduce((total, age) => total + age, 0);
+console.log(`L'età media degli autori è: ${agesTotal / ages.length} anni`);

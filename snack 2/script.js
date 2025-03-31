@@ -3,18 +3,16 @@
 //Salva in una variabile (fullPricedBook) il primo elemento di discountedBooks che ha un prezzo intero (senza centesimi).
 
 const availableBooks = books.filter((book) => book.available);
-console.log(availableBooks);
 
 const discountedBooks = availableBooks.map((book) => {
-  const discountedPrice =
-    (parseFloat(book.price.replace("€", "")) * 0.8).toFixed(2) + "€";
+  const priceValue = parseFloat(book.price.replace("€", ""));
+  const discountedPrice = (priceValue * 0.8).toFixed(2);
 
-  return { ...book, price: discountedPrice };
+  return { ...book, price: `${discountedPrice}€` };
 });
-console.log(discountedBooks);
 
 const fullPricedBook = discountedBooks.find((book) => {
   const priceValue = parseFloat(book.price.replace("€", ""));
-  return Number.isInteger(priceValue);
+  return priceValue % 1 === 0;
 });
 console.log(fullPricedBook);

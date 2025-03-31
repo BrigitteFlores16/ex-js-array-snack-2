@@ -4,14 +4,7 @@
 //(se areAuthorsAdult è true, ordina in ordine crescente, altrimenti in ordine decrescente)
 
 const authors = books.map((book) => book.author);
-console.log(authors);
 
 const areAuthorsAdults = authors.every((author) => author.age >= 18);
-authors.sort((a, b) => {
-  if (areAuthorsAdults) {
-    return a.age - b.age;
-  } else {
-    return b.age - a.age;
-  }
-});
-console.log(areAuthorsAdults);
+authors.sort((a, b) => (a.age - b.age) * (areAuthorsAdults ? 1 : -1));
+console.log(authors);

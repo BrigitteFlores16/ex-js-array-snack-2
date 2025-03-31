@@ -9,27 +9,15 @@
 //per creare una funzione (getBooks) che a partire da un array di id (ids), ritorna una promise che risolve un array di libri (books).
 //Testala con l’array [2, 13, 7, 21, 19] .
 
-const URL = "https://boolean-spec-frontend.vercel.app/freetestapi/books/";
+const ids = [2, 13, 7, 21, 19];
 
-function getBooks(ids) {
-  return Promise.all(
-    ids.map((id) =>
-      fetch(`${URL}${id}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Errore ${id}: ${response.status}`);
-          }
-          return response.json();
-        })
-        .catch((error) => {
-          console.error(error);
-          return null;
-        })
-    )
-  ).then((books) => books.filter((book) => book !== null));
+async function getBooks(ids) {
+  const Url = `https://freetestapi.com/api/v1/books/`;
+  const bookPromises = ids.map((id) =>
+    fetch(`${Url}${id}`).then((res) => res.json())
+  );
+  const books = await Promise.all(bookPromises);
+  return books;
 }
 
-const ids = [2, 13, 7, 21, 19];
-getBooks(ids).then((books) => {
-  console.log("Books:", books);
-});
+getBooks(ids).then((books) => console.log(books));
